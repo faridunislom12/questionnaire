@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/question/{id}', [QuestionController::class, 'show']);
+Route::post('/webhook', [WebhookController::class, 'input']);
+
