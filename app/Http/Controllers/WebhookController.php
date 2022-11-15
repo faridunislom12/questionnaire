@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class WebhookController extends Controller
 {
@@ -17,12 +17,10 @@ class WebhookController extends Controller
      */
     public function input(Request $request): Response
     {
-        Answer::create([
-            'answer' => $request->input('answer'),
-            'question_id' => $request->input('question_id'),
-            'next_question_id' => $request->input('next_question_id'),
-        ]);
+        $question = Question::find($request->input('question_id'));
+//        $answer = Answer::find($request->input('answer_id'));
+//        $nextQuestion = $answer->nextQuestion;
 
-        return response(Question::find($request->input('next_question_id')));
+        return response($question->nextQuestion);
     }
 }
